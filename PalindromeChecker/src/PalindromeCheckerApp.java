@@ -18,14 +18,16 @@ public class PalindromeCheckerApp {
         System.out.println("Enter a word : ");
         String wrd=sc.nextLine(),temp = "";
         Stack<Character> stack=new Stack<>();
+        Queue<Character> queue=new LinkedList<>();
         for(char c:wrd.toCharArray())
         {
             stack.push(c);
+            queue.add(c);
         }
         boolean isPalindrome =true;
-        for(char c:wrd.toCharArray())
+        while(!queue.isEmpty())
         {
-            if(c!=stack.pop()) {
+            if(queue.remove()!=stack.pop()) {
                 isPalindrome = false;
                 System.out.println("Not Palindrome");
                 System.exit(0);
@@ -33,6 +35,5 @@ public class PalindromeCheckerApp {
         }
         if(isPalindrome)
             System.out.println("Palindrome");
-
     }
 }
