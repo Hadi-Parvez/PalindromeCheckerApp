@@ -17,21 +17,23 @@ public class PalindromeCheckerApp {
         Scanner sc=new Scanner(System.in);
         System.out.println("Enter a word : ");
         String wrd=sc.nextLine(),temp = "";
-        Deque<Character> deque=new ArrayDeque<>();
-        for(char c:wrd.toCharArray())
+        LinkedList<Character> list=new LinkedList<>();
+        for(char c: wrd.toCharArray())
         {
-            deque.addLast(c);
+            list.add(c);
         }
-        boolean isPalindrome =true;
-        while(deque.size()>1)
+        boolean isPalindrome=true;
+        while(list.size()>1)
         {
-            if(deque.removeLast()!=deque.removeFirst()) {
-                isPalindrome = false;
-                System.out.println("Not Palindrome");
-                System.exit(0);
+            if(list.removeFirst()!=list.removeLast())
+            {
+                isPalindrome=false;
+                break;
             }
         }
         if(isPalindrome)
-            System.out.println("Palindrome");
+            System.out.println("word is Palindrome");
+        else
+            System.out.println("word is not Palindrome");
     }
 }
