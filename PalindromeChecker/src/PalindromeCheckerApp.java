@@ -15,29 +15,32 @@ import java.util.*;
 public class PalindromeCheckerApp {
     public static void main(String[] args) {
         Scanner sc=new Scanner(System.in);
+        PalindromeStrategy strategy = new StackStrategy();
         System.out.println("Enter a word : ");
         String wrd=sc.nextLine();
-        PalindromeService ps=new PalindromeService();
-        boolean isPalindrome=ps.checkPalindrome(wrd);
-        if(isPalindrome)
-            System.out.println("word is Palindrome");
-        else
-            System.out.println("word is not Palindrome");
+        boolean isPalindrome = strategy.check(wrd);
+        System.out.println("Input : " + wrd);
+        System.out.println("Is Palindrome? : " + isPalindrome);
 
     }
 }
-class PalindromeService
-{
-    public boolean checkPalindrome(String input)
-    {
-        int start =0;
-        int end=input.length()-1;
-        while(start<end)
-        {
-            if(input.charAt(start)!=input.charAt(end))
+interface PalindromeStrategy {
+    boolean check(String input);
+}
+
+class StackStrategy implements PalindromeStrategy {
+    @Override
+    public boolean check(String input) {
+        if (input == null) return false;
+        String cleanedInput = input.toLowerCase();
+        Stack<Character> stack = new Stack<>();
+        for (char c : cleanedInput.toCharArray()) {
+            stack.push(c);
+        }
+        for (char c : cleanedInput.toCharArray()) {
+            if (c != stack.pop()) {
                 return false;
-            start++;
-            end--;
+            }
         }
         return true;
     }
